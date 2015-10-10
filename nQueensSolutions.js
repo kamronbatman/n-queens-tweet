@@ -1,10 +1,13 @@
-function nQueensCount(n, leftDiagonals, columns, rightDiagonals) {
+function nQueensSolutions(n, solution, leftDiagonals, columns, rightDiagonals) {
   // Create a row with all bits set.
   // This is for testing our base case
   var bitTotal = (1 << n)  - 1;
 
-  // If we hit our base case, then we are going to start our solution counter at 1, if not, then 0
-  var solutions = columns === bitTotal || 0;
+  // Start our solution as an empty string if needed
+  var solution = solution || "";
+
+  // Start our solutions as an empty string too
+  var solutions = "";
 
   // Create a bit field.  This is inverted so we have bits set where we can place queens
   var field = ~(leftDiagonals | columns | rightDiagonals);
@@ -23,8 +26,16 @@ function nQueensCount(n, leftDiagonals, columns, rightDiagonals) {
     // Add our new queen to our columns
     var newColumns = columns | queen;
 
-    // Recurse to the next row, and add any solutions to our solution counter
-    solutions += nQueensCount(n, newLefts, newColumns, newRights);
+    // We hit our base case
+    if (newColumns == bitTotal) {
+      solutions += solution + queen;
+    } else {
+      // We are going to recurse.
+      var result = nQueensSolutions(n, solution + queen + ",", newLefts, newColumns, newRights);
+
+      // If we already have a solution, and we got a result, then add a pipe before the result.
+      solutions += solutions && results ? "|" + result : result;
+    }
 
     // Take the queen off of our field so we can get the next queen position
     field -= queen;
