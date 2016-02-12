@@ -2,7 +2,7 @@
 > A solution to N Queens using bitwise operators.
 
 ### nQueensCountTweet.js
-> This file contains a 106 character solution to N-Queens.
+> This file contains an 106 character solution to N-Queens.
 > You can find the tweet [here](https://goo.gl/72b3FZ).
 
 ## Thanks
